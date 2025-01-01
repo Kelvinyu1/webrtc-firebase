@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebRTC Demo</title>
     <script type="module" crossorigin src="/webrtc-firebase/assets/index.f4f4811a.js"></script>
-    <link rel="stylesheet" href="/webrtc-firebase/assets/index.73b8198b.css">
+    <link rel="stylesheet" href="/webrtc-firebase/assets/index.b61e2ede.css">
   </head>
   <body>
       <div class="videos">
       <span >
         <h3>Local Stream</h3>
-        <video id="local" autoplay playsinline></video>
+        <video id="webcamVideo" autoplay playsinline class="draggable"></video>
       </span>
       <span >
         <h3>Remote Stream</h3>
-        <video id="remote" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline class="draggable"></video>
       </span>
 
 
@@ -42,9 +42,9 @@
 
      <script>
   //Make the DIV element draggagle:
-dragElement(document.getElementById("local"));
+dragElement(document.getElementById("webcamVideo"));
 
-dragElement(document.getElementById("remote"));
+dragElement(document.getElementById("remoteVideo"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
