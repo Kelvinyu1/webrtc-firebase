@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebRTC Demo</title>
     <script type="module" crossorigin src="/webrtc-firebase/assets/index.f4f4811a.js"></script>
-    <link rel="stylesheet" href="/webrtc-firebase/assets/index.56eee7dc.css">
+    <link rel="stylesheet" href="/webrtc-firebase/assets/index.73b8198b.css">
   </head>
   <body>
       <div class="videos">
-      <span style="left: 0; top: 0;">
+      <span >
         <h3>Local Stream</h3>
-        <video id="webcamVideo" autoplay playsinline></video>
+        <video id="local" autoplay playsinline></video>
       </span>
-      <span style="left: 42vw; top: 0;">
+      <span >
         <h3>Remote Stream</h3>
-        <video id="remoteVideo" autoplay playsinline></video>
+        <video id="remote" autoplay playsinline></video>
       </span>
 
 
@@ -41,33 +41,51 @@
     
 
      <script>
-    document.querySelectorAll(".videos span").forEach((element) => {
-      let isDragging = false;
-      let startX, startY, initialLeft, initialTop;
+  //Make the DIV element draggagle:
+dragElement(document.getElementById("local"));
 
-      element.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        initialLeft = element.offsetLeft;
-        initialTop = element.offsetTop;
-        element.style.cursor = "grabbing";
-      });
+dragElement(document.getElementById("remote"));
 
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
 
-        element.style.left = `${initialLeft + dx}px`;
-        element.style.top = `${initialTop + dy}px`;
-      });
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
 
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-        element.style.cursor = "grab";
-      });
-    });
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
   </script>
 
   </body>
