@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebRTC Demo</title>
     <script type="module" crossorigin src="/webrtc-firebase/assets/index.f4f4811a.js"></script>
-    <link rel="stylesheet" href="/webrtc-firebase/assets/index.2847f842.css">
+    <link rel="stylesheet" href="/webrtc-firebase/assets/index.a355992e.css">
   </head>
   <body>
     <h2>1. Start your Webcam</h2>
@@ -38,6 +38,36 @@
     <button id="hangupButton" disabled>Hangup</button>
 
     
+
+     <script>
+    document.querySelectorAll(".videos span").forEach((element) => {
+      let isDragging = false;
+      let startX, startY, initialLeft, initialTop;
+
+      element.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        initialLeft = element.offsetLeft;
+        initialTop = element.offsetTop;
+        element.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        element.style.left = `${initialLeft + dx}px`;
+        element.style.top = `${initialTop + dy}px`;
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        element.style.cursor = "grab";
+      });
+    });
+  </script>
 
   </body>
 </html>
