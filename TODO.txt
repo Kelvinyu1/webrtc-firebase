@@ -1,0 +1,7 @@
+learn what the code is really doing, line by line 
+move the backend logic to python/rust
+
+stretch: migrate to azure cosmos db
+dynamic layout for the web videos 
+
+

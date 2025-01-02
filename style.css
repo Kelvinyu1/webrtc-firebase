@@ -9,15 +9,46 @@ body {
   margin: 80px 10px;
 }
 
-video {
-  width: 40vw;
-  height: 30vw;
-  margin: 2rem;
-  background: #2c3e50;
+/* video { */
+  /* width: 40vw; */
+  /* height: 30vw; */
+  /* margin: 2rem; */
+  /* background: #2c3e50; */
+/* } */
+
+
+/* .draggable { */
+  /* position: absolute; */
+  /* z-index: 9; */
+  /* background-color: #f1f1f1; */
+  /* text-align: center; */
+  /* border: 1px solid #d3d3d3; */
+  /* cursor: move; /* Indicate draggable elements */ 
+/* } */
+
+video.draggable {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  cursor: move;
+  width: 300px; /* Initial width */
+  height: 150px; /* Initial height */
+  max-width: 300px; /* Optional: set a maximum width */
+  max-height: 300px; /* Optional: set a maximum height */
+  object-fit: cover; /* Ensures the video fits the dimensions */
+  margin: 0;
+  padding: 0;
 }
 
-.videos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+#webcamVideo {
+  top: 100px; /* Set initial top position for the first div */
+  left: 10px; /* Set initial left position for the first div */
 }
+
+#remoteVideo {
+  top: 100px; /* Set initial top position for the second div */
+  left: 200px; /* Set initial left position for the second div */
+}
+

@@ -7,19 +7,20 @@
     <title>WebRTC Demo</title>
   </head>
   <body>
-    <h2>1. Start your Webcam</h2>
-    <div class="videos">
-      <span>
+      <div class="videos">
+      <span >
         <h3>Local Stream</h3>
-        <video id="webcamVideo" autoplay playsinline></video>
+        <video id="webcamVideo" autoplay playsinline class="draggable"></video>
       </span>
-      <span>
+      <span >
         <h3>Remote Stream</h3>
-        <video id="remoteVideo" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline class="draggable"></video>
       </span>
 
 
     </div>
+
+    <h2>1. Start your Webcam</h2>
 
     <button id="webcamButton">Start webcam</button>
     <h2>2. Create a new Call</h2>
@@ -36,6 +37,49 @@
     <button id="hangupButton" disabled>Hangup</button>
 
     <script type="module" src="/main.js"></script>
+
+     <script>
+  //Make the DIV element draggagle:
+dragElement(document.getElementById("webcamVideo"));
+
+dragElement(document.getElementById("remoteVideo"));
+
+  function dragElement(elmnt) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // Get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // Call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // Calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // Set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // Stop moving when the mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+  </script>
 
   </body>
 </html>
